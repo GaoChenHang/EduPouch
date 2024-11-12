@@ -18,8 +18,15 @@ auth_account.post("/register", (req, res) => {
         values, (err, result) => {
             
         if (err) {
-            if(err.errno = 1062){
-                res.status(400).json({ message: '用户名已存在' });
+            // 1062 error 主键冲突
+            if(err.errno === 1062){
+                res.status(400).json(
+                    {
+                    status:400,
+                     
+                    message_cn: '此用户名已经存在' 
+                    }
+                );
             }
             console.error('Error executing query:', err);
             res.status(500).send('Internal Server Error');
@@ -27,7 +34,11 @@ auth_account.post("/register", (req, res) => {
         }
 
         console.log('Query result:', result);
-        res.status(201).json('User registered successfully');
+        res.status(201).json({
+            status:201,
+            message_cn:"注册成功",
+            message_en:"User registered successfully"
+        });
     });
 });
 

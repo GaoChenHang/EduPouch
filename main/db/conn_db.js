@@ -3,7 +3,10 @@ const connection = mysql.createConnection({
     host:'47.96.122.101',
     user:'user_dev',
     password:'Yr6MsGw26NPxiKKS',
-    database:'iqweb'
+    database:'iqweb',
+    supportBigNumbers: true,
+    bigNumberStrings: true
+
 })
 const checkConnection = () => {
     connection.query('SELECT VERSION() AS version', (err, result) => {

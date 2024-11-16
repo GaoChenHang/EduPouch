@@ -1,17 +1,17 @@
-// api url /auth/
-import { Router } from "express";
-import Snowflake from "../../tools/snowflakeInstance.js";
-import connection from "../../db/conn_db.js";
-import CryptoJS from "crypto-js";
-import Jsonwebtoken from "jsonwebtoken";
-import { jwt_secret } from "../../../tools.js";
-import log4js from "log4js"
+const Router = require("express").Router;
+const Snowflake = require("../../tools/snowflakeInstance.js");
+const connection = require("../../db/conn_db.js");
+const crypto = require("crypto-js");
+const Jsonwebtoken = require("jsonwebtoken");
+const { jwt_secret } = require("../../../tools.js");
+const log4js = require("log4js");
 const Logger = log4js.getLogger();
+
 const auth_account = Router();
 
 auth_account.post("/register", (req, res) => {
     const { username, password } = req.body;
-    const hashedPassword = CryptoJS.SHA512(password).toString();
+    const hashedPassword = crypto.SHA512(password).toString();
     const id = Snowflake.nextId();
 
     const values = [id, username, hashedPassword];
@@ -113,4 +113,4 @@ auth_account.post("/login", (req, res) => {
     });
 });
 
-export default auth_account;
+module.exports =  auth_account;

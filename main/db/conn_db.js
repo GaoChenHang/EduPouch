@@ -1,6 +1,8 @@
-import mysql from 'mysql';
-import log4j from 'log4js';
-const Logger = log4j.getLogger();
+
+const mysql = require('mysql');
+const log4js = require('log4js');
+const Logger = log4js.getLogger();
+
 
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -28,7 +30,7 @@ const checkConnection = () => {
             setTimeout(() => {
                 checkConnection();
             }, 5000); // 5秒后重试
-            return;
+
         } else {
             Logger.info(`MySQL 连接成功 版本号：${result[0].version} 用户名：${connection.config.user}`);
         }
@@ -37,4 +39,5 @@ const checkConnection = () => {
 
 
 setInterval(checkConnection, 60000);
-export default connection;
+module.exports = connection;
+//node 可以这样连接数据库吗 ，其他的js文件直接require就可执行操作，如果多个文件同时引用会创建多个数据库连接吗

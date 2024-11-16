@@ -6,7 +6,7 @@
 }
 */
 
-export default [
+module.exports =  [
     {
         url: "/",
         method: "get",

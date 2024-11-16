@@ -1,6 +1,6 @@
-import Snowflake from "./snowflake.js";
+
+const SnowFlake = require("./snowflake.js")
 
 // 实例化 Snowflake
-const snowflake = new Snowflake(1, 1);
-
-export default snowflake;
+const snowflake = new SnowFlake(1, 1);
+module.exports = snowflake;

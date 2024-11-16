@@ -1,8 +1,8 @@
-import New_question_router from "./new_question.js";
-import {Router} from "express";
-import Auth_account from "./auth_account.js";
 
+const AuthAccount = require("./auth_account.js");
+const {Router} = require("express");
+const New_question_router = require("./new_question.js");
 const router = Router();
 router.use("/nq", New_question_router);
-router.use("/auth",Auth_account)
-export default router;
+router.use("/auth",AuthAccount)
+module.exports = router;

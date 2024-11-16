@@ -64,4 +64,4 @@ class Snowflake {
     }
 }
 
-export default Snowflake;
+module.exports =  Snowflake;

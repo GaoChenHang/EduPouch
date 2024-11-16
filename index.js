@@ -1,7 +1,7 @@
-import express from "express";
+const express = require("express");
+const router = require("./main/router/router_cre.js");
+const log4js = require("log4js");
 
-import router from "./main/router/router_cre.js";
-import log4js from "log4js"
 const Logger = log4js.getLogger();
 // 配置 log4js
 log4js.configure({

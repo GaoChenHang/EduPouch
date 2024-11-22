@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.login-container h1 {
+    font-size: 1.5em;
+    color: #757575;
+    margin-bottom: 30px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    font-size: 16px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.login-container input[type="text"]:focus,
+.login-container input[type="password"]:focus {
+    border-color: #4285F4;
+}
+
+.login-container button {
+    width: 100%;
+    background-color: #4285F4;
+    color: white;
+    height: 40px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-container button:hover {
+    background-color: #357ae8;
+    transform: scale(1.03);
+}
+.login-container button:active {
+    background-color: #2f5d9b;
+    transform: scale(0.97);
+}
+.login-container .links {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.login-container .links a {
+    display: block;
+    margin: 10px 0;
+    color: #4285F4;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.login-container .links a:hover {
+    color: #357ae8;
+    transform: scale(1.05);
+}
+
+.login-container .links a:active {
+    color: #2f5d9b;
+    transform: scale(0.95);
+}
+/* 响应式设计 */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 20px;
+    }
+
+    .login-container h1 {
+        font-size: 1.2em;
+        margin-bottom: 20px;
+    }
+
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    .login-container button {
+        height: 35px;
+        font-size: 13px;
+    }
+}
+
+#tips{
+    color: red;
+    font-size: 12px;
+    text-align: left;
+}

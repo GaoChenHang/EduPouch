@@ -1,15 +1,14 @@
-const Router = require("express").Router;
+const auth_account_api = require("express").Router();
 const Snowflake = require("../../tools/snowflakeInstance.js");
 const connection = require("../../db/conn_db.js");
 const crypto = require("crypto-js");
 const Jsonwebtoken = require("jsonwebtoken");
-const { jwt_secret } = require("../../../tools.js");
+const { JWT_SECRET } = require("../../../tools.js");
 const log4js = require("log4js");
 const Logger = log4js.getLogger();
 
-const auth_account = Router();
 
-auth_account.post("/register", (req, res) => {
+auth_account_api.post("/register", (req, res) => {
     const { username, password } = req.body;
     const hashedPassword = crypto.SHA512(password).toString();
     const id = Snowflake.nextId();
@@ -17,7 +16,7 @@ auth_account.post("/register", (req, res) => {
     const values = [id, username, hashedPassword];
     Logger.debug(`Register request from ${req.ip}`);
 
-    connection.query(`INSERT INTO user (id, username, password) VALUES (?, ?, ?)`, 
+    connection.query(`INSERT INTO user (user_id, username, password) VALUES (?, ?, ?)`,
         values, (err, result) => {            
         if (err) {
             // 1062 error 主键冲突
@@ -47,7 +46,7 @@ auth_account.post("/register", (req, res) => {
     });
 });
 
-auth_account.post("/login", (req, res) => {
+auth_account_api.post("/login", (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) {
         Logger.warn(`Username or password is null from ${req.ip}`);
@@ -61,7 +60,7 @@ auth_account.post("/login", (req, res) => {
 
     const hashedPasswordInput = crypto.SHA512(password).toString();
 
-    connection.query(`SELECT id, password FROM user WHERE username = ?`, [username], (err, result) => {
+    connection.query(`SELECT user_id, password FROM user WHERE username = ?`, [username], (err, result) => {
         if (err) {
             Logger.error(`Error executing query from ${req.ip}: ${err.message}`, err);
             res.status(500).json({
@@ -90,7 +89,7 @@ auth_account.post("/login", (req, res) => {
                 user_id: userId,
                 login_time: Date.now()
             };
-            const token = Jsonwebtoken.sign(payload, jwt_secret, { expiresIn: "5h" });
+            const token = Jsonwebtoken.sign(payload, JWT_SECRET, { expiresIn: "5h" });
 
             Logger.info(`User ${username} logged in successfully from ${req.ip}`);
             res.status(200).json({
@@ -113,4 +112,4 @@ auth_account.post("/login", (req, res) => {
     });
 });
 
-module.exports =  auth_account;
+module.exports =  auth_account_api;

@@ -40,4 +40,3 @@ const checkConnection = () => {
 
 setInterval(checkConnection, 60000);
 module.exports = connection;
-//node 可以这样连接数据库吗 ，其他的js文件直接require就可执行操作，如果多个文件同时引用会创建多个数据库连接吗
